@@ -20,6 +20,10 @@ mongoose.Promise = global.Promise;
 
 //routes hangle get request
 app.use(morgan("dev"));
+
+//make upload folder publicly accessible
+app.use(express.static("uploads"));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
