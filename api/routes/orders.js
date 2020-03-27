@@ -9,6 +9,7 @@ const Product = require("../models/product");
 router.get("/", (req, res, next) => {
   Order.find()
     .select("product quantity _id")
+    .populate("product", "name")
     .exec()
     .then(docs => {
       res.status(200).json({
@@ -73,6 +74,7 @@ router.post("/", (req, res, next) => {
 
 router.get("/:orderId", (req, res, next) => {
   Order.findById(req.params.orderId)
+    .populate("product")
     .exec()
     .then(order => {
       if (!order) {
@@ -102,7 +104,7 @@ router.delete("/:orderId", (req, res, next) => {
       res.status(200).json({
         message: "Order deleted",
         request: {
-          type: "POST",
+          type: "GET",
           url: "http://localhost:3000/orders",
           body: { productId: "ID", quantity: "Number" }
         }

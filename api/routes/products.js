@@ -49,7 +49,7 @@ router.post("/", (req, res, next) => {
           price: result.price,
           _id: result._id,
           request: {
-            type: "POST",
+            type: "GET",
             url: "http://localhost:3003/products/" + result._id
           }
         }
@@ -104,7 +104,7 @@ router.patch("/:productId", (req, res, next) => {
       res.status(200).json({
         message: "Product updated",
         request: {
-          type: "PATCH",
+          type: "GET",
           url: "http://localhost:3003/products" + id
         }
       });
